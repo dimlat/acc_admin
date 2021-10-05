@@ -14,7 +14,7 @@ class PengajuanWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
-          Expanded(child: ReusableColumnWidget(title: "History")),
+          Expanded(child: ReusableColumnWidget(title: "Read")),
           VerticalDivider(thickness: 2),
           Expanded(child: ReusableColumnWidget(title: "Latest")),
         ],

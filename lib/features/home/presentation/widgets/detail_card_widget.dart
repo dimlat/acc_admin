@@ -12,6 +12,7 @@ class DetailCardWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.all(kDefaultPadding),
+      padding: EdgeInsets.all(kDefaultPadding),
       height: 100,
       width: 383,
       decoration: BoxDecoration(
@@ -26,7 +27,14 @@ class DetailCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: const Text("isi container"),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: const [
+          Text("Last Update:"),
+          Text("Nama Nasabah:"),
+          Text("Expired:"),
+        ],
+      ),
     );
   }
 }
