@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/font_styling.dart';
-import '../detail_card_widget.dart';
+import '../reusable_column_widget.dart';
 
 class CheckFisikWidget extends StatelessWidget {
   const CheckFisikWidget({
@@ -14,44 +13,10 @@ class CheckFisikWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Text("History", style: kFontTitleStyle),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: const [
-                        DetailCardWidget(),
-                        DetailCardWidget(),
-                        DetailCardWidget(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const VerticalDivider(thickness: 2),
-          Expanded(
-            child: Column(
-              children: [
-                Text("Latest", style: kFontTitleStyle),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: const [
-                        DetailCardWidget(),
-                        DetailCardWidget(),
-                        DetailCardWidget(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        children: const [
+          Expanded(child: ReusableColumnWidget(title: "History")),
+          VerticalDivider(thickness: 2),
+          Expanded(child: ReusableColumnWidget(title: "Latest")),
         ],
       ),
     );
