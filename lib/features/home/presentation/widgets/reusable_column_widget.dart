@@ -14,7 +14,13 @@ class ReusableColumnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(title!, style: kFontTitleStyle),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(title!, style: kFontTitleStyle),
+            Text("Lihat Semua", style: kFontSubTitleStyle),
+          ],
+        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
