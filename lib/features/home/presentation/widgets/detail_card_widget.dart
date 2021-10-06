@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/constants/size.dart';
+import '../../../detail/presentation/pages/detail_page.dart';
 
 class DetailCardWidget extends StatelessWidget {
   final dynamic data;
   const DetailCardWidget({
-    Key? key, this.data,
+    Key? key, required this.data,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,15 @@ class DetailCardWidget extends StatelessWidget {
           Text("Last Update: ${data['lastUpdate']}"),
           Text("Nama Nasabah: ${data['namaNasabah']}"),
           Text("Expired: ${data['expired']}"),
+          const Spacer(),
+          Expanded(
+            flex: 4,
+            child: ElevatedButton(
+              onPressed: () => Get.to(() => DetailPage(data: data)),
+              child: const Text('Detail'),
+            ),
+          )
+          
         ],
       ),
     );
