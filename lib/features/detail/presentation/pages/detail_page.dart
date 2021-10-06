@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/color.dart';
 import '../../../../core/constants/size.dart';
-import '../../../../core/constants/wording_default.dart';
 
 class DetailPage extends StatelessWidget {
   final dynamic data;
-  const DetailPage({Key? key, required this.data}) : super(key: key);
+  const DetailPage({Key? key, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("DetailPage"),
+          title: const Text("Detail"),
           centerTitle: false,
           backgroundColor: kColorDarkPrimary,
           elevation: 0,
@@ -34,8 +34,11 @@ class DetailPage extends StatelessWidget {
                 ),
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(kDefaultTextContent),
+                      Text("Last Update: ${data['lastUpdate']}"),
+                      Text("Nama Nasabah: ${data['namaNasabah']}"),
+                      Text("Expired: ${data['expired']}"),
                     ],
                   ),
                 ),
