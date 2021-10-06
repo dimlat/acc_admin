@@ -14,7 +14,7 @@ class SeeAllPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("SeeAllPage"),
+          title: Text("${hook!.stage} ${hook!.section}"),
           centerTitle: false,
           backgroundColor: kColorDarkPrimary,
           elevation: 0,
