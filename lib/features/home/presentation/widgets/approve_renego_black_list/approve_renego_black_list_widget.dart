@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
 class ApproveRenegoBlackListWidget extends StatelessWidget {
@@ -13,12 +14,23 @@ class ApproveRenegoBlackListWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: const [
-          Expanded(child: ReusableColumnWidget(title: "Black List")),
-          VerticalDivider(thickness: 2),
-          Expanded(child: ReusableColumnWidget(title: "Renegosiasi")),
-          VerticalDivider(thickness: 2),
-          Expanded(child: ReusableColumnWidget(title: "Approve")),
+        children: [
+          Expanded(
+              child: ReusableColumnWidget(
+                  hook: PageHook(
+                      stage: StageHook.blackList,
+                      section: SectionHook.blackList))),
+          const VerticalDivider(thickness: 2),
+          Expanded(
+              child: ReusableColumnWidget(
+                  hook: PageHook(
+                      stage: StageHook.renegosiasi,
+                      section: SectionHook.renegosiasi))),
+          const VerticalDivider(thickness: 2),
+          Expanded(
+              child: ReusableColumnWidget(
+                  hook: PageHook(
+                      stage: StageHook.approve, section: SectionHook.approve))),
         ],
       ),
     );

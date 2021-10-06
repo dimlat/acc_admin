@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/size.dart';
 
 class DetailCardWidget extends StatelessWidget {
+  final dynamic data;
   const DetailCardWidget({
-    Key? key,
+    Key? key, this.data,
   }) : super(key: key);
 
   @override
@@ -29,10 +30,10 @@ class DetailCardWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          Text("Last Update:"),
-          Text("Nama Nasabah:"),
-          Text("Expired:"),
+        children: [
+          Text("Last Update: ${data['lastUpdate']}"),
+          Text("Nama Nasabah: ${data['namaNasabah']}"),
+          Text("Expired: ${data['expired']}"),
         ],
       ),
     );
