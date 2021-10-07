@@ -1,36 +1,59 @@
-
-
 import 'package:flutwebboil/features/home/domain/entities/page_hook.dart';
 
 List latest = [
   {
     "lastUpdate": "12 Jan 2021",
-    "namaNasabah": "Muhammad Nur Latief",
+    "namaNasabah": "Pengajuan",
     "expired": "6 hari",
-    "stageHook": StageHook.pengajuan
+    "stageHook": StageHook.pengajuan,
+    "handleUser": "123123123"
   },
   {
     "lastUpdate": "13 Jan 2021",
-    "namaNasabah": "Muhammad Nur Latief",
+    "namaNasabah": "Renego",
     "expired": "6 hari",
-    "stageHook": StageHook.renegosiasi
+    "stageHook": StageHook.renegosiasi,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
   },
   {
     "lastUpdate": "14 Jan 2021",
-    "namaNasabah": "Muhammad Nur Latief",
+    "namaNasabah": "Approve",
     "expired": "6 hari",
-    "stageHook": StageHook.approve
+    "stageHook": StageHook.approve,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
   },
   {
     "lastUpdate": "15 Jan 2021",
-    "namaNasabah": "Muhammad Nur Latief",
+    "namaNasabah": "Akad",
     "expired": "6 hari",
-    "stageHook": StageHook.akad
+    "stageHook": StageHook.akad,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
   },
   {
     "lastUpdate": "16 Jan 2021",
-    "namaNasabah": "Muhammad Nur Latief",
+    "namaNasabah": "Nasabah Valid",
     "expired": "6 hari",
-    "stageHook": StageHook.valid
+    "stageHook": StageHook.validNasabah,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
+  },
+  {
+    "lastUpdate": "16 Jan 2021",
+    "namaNasabah": "cekFisik",
+    "expired": "6 hari",
+    "stageHook": StageHook.cekFisik,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
+  },
+  {
+    "lastUpdate": "16 Jan 2021",
+    "namaNasabah": "Mitranet Valid",
+    "expired": "6 hari",
+    "stageHook": StageHook.validMitranet,
+    "handleUser": "123123123",
+    "handeTransaction": "123123123"
   }
 ];

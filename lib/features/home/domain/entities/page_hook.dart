@@ -14,7 +14,8 @@ class StageHook {
   static const blackList = "blackList";
   static const cekFisik = "cekFisik";
   static const akad = "akad";
-  static const valid = "valid";
+  static const validNasabah = "valid nasabah";
+  static const validMitranet = "valid mitranet";
 }
 
 class SectionHook {

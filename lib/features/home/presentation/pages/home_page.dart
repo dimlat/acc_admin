@@ -6,10 +6,12 @@ import '../../../../core/constants/font_styling.dart';
 import '../../../../core/constants/size.dart';
 import '../widgets/akad/akad_widget.dart';
 import '../widgets/approve_renego_black_list/approve_renego_black_list_widget.dart';
+import '../widgets/black_list/approve_renego_black_list_widget.dart';
 import '../widgets/check_fisik/check_fisik_widget.dart';
 import '../widgets/pengajuan/pengajuan_widget.dart';
 import '../widgets/reusable_container_widget.dart';
-import '../widgets/valid/valid_widget.dart';
+import '../widgets/valid_mitranet/valid_mitranet_widget.dart';
+import '../widgets/valid_nasabah/valid_nasabah_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,10 +53,11 @@ class HomePage extends StatelessWidget {
                           indent: kDefaultPadding * 5,
                           endIndent: kDefaultPadding * 5,
                         ),
-                        Text("Black List / Nego / Approve",
-                            style: kFontHeaderStyle),
+                        Text("Renego / Approve", style: kFontHeaderStyle),
                         const ReusableContainerWidget(
-                            child: ApproveRenegoBlackListWidget()),
+                            child: ApproveRenegoWidget()),
+                        Text("Black List", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(child: BlackListWidget()),
                         Divider(
                           thickness: 3,
                           color: Colors.black,
@@ -78,8 +81,18 @@ class HomePage extends StatelessWidget {
                           indent: kDefaultPadding * 5,
                           endIndent: kDefaultPadding * 5,
                         ),
-                        Text("Valid", style: kFontHeaderStyle),
-                        const ReusableContainerWidget(child: ValidWidget()),
+                        Text("Nasabah Valid", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(
+                            child: ValidNasabahWidget()),
+                        Divider(
+                          thickness: 3,
+                          color: Colors.black,
+                          indent: kDefaultPadding * 5,
+                          endIndent: kDefaultPadding * 5,
+                        ),
+                        Text("Mitranet Valid", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(
+                            child: ValidMitranetWidget()),
                       ],
                     ),
                   ),

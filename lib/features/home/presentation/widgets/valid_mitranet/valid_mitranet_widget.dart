@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
-class ApproveRenegoWidget extends StatelessWidget {
-  const ApproveRenegoWidget({
+class ValidMitranetWidget extends StatelessWidget {
+  const ValidMitranetWidget({
     Key? key,
   }) : super(key: key);
 
@@ -17,16 +17,8 @@ class ApproveRenegoWidget extends StatelessWidget {
         children: [
           Expanded(
             child: ReusableColumnWidget(
-              hook: PageHook(
-                  stage: StageHook.renegosiasi,
-                  section: SectionHook.renegosiasi),
-            ),
-          ),
-          const VerticalDivider(thickness: 2),
-          Expanded(
-            child: ReusableColumnWidget(
-              hook: PageHook(
-                  stage: StageHook.approve, section: SectionHook.approve),
+              hook:
+                  PageHook(stage: StageHook.validMitranet, section: SectionHook.latest),
             ),
           ),
         ],
