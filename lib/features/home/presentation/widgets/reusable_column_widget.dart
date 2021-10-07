@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constants/font_styling.dart';
+import '../../../../injection_container.dart';
 import '../../../see_all/presentation/pages/see_all_page.dart';
 import '../../domain/entities/page_hook.dart';
 import 'detail_card_widget.dart';
-import 'pengajuan/pengajuan_dummy_data.dart';
 
 class ReusableColumnWidget extends StatelessWidget {
   final PageHook? hook;
@@ -27,11 +27,25 @@ class ReusableColumnWidget extends StatelessWidget {
                 child: Text("Lihat Semua", style: kFontSubTitleStyle)),
           ],
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-                children: [for (var el in latest) DetailCardWidget(data: el)]),
-          ),
+        FutureBuilder(
+          future: tenLastDataController.route(hook!),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.data.length == 0) {
+              return const Center(child: Text("No Data"));
+            }
+            return Expanded(
+              child: ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final data = snapshot.data[index];
+                  return DetailCardWidget(data: data);
+                },
+              ),
+            );
+          },
         ),
       ],
     );

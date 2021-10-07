@@ -33,9 +33,9 @@ class DetailCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text("Last Update: ${data['lastUpdate']}"),
-          Text("Nama Nasabah: ${data['namaNasabah']}"),
-          Text("Expired: ${data['expired']}"),
+          Text("Last Update: ${data.namaPelanggan}"),
+          Text("Nama Nasabah: ${data.namaPelanggan}"),
+          Text("Expired: ${data.namaPelanggan}"),
           const Spacer(),
           Expanded(
             flex: 4,

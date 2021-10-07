@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
-class PengajuanWidget extends StatelessWidget {
-  const PengajuanWidget({
+class ValidNasabahWidget extends StatelessWidget {
+  const ValidNasabahWidget({
     Key? key,
   }) : super(key: key);
 
@@ -17,16 +17,8 @@ class PengajuanWidget extends StatelessWidget {
         children: [
           Expanded(
               child: ReusableColumnWidget(
-            hook:
-                PageHook(stage: StageHook.pengajuan, section: SectionHook.read),
-          )),
-          const VerticalDivider(thickness: 2),
-          Expanded(
-            child: ReusableColumnWidget(
-              hook: PageHook(
-                  stage: StageHook.pengajuan, section: SectionHook.latest),
-            ),
-          ),
+                  hook: PageHook(
+                      stage: StageHook.validNasabah, section: SectionHook.latest))),
         ],
       ),
     );
