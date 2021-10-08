@@ -56,8 +56,6 @@ class HomePage extends StatelessWidget {
                         Text("Renego / Approve", style: kFontHeaderStyle),
                         const ReusableContainerWidget(
                             child: ApproveRenegoWidget()),
-                        Text("Black List", style: kFontHeaderStyle),
-                        const ReusableContainerWidget(child: BlackListWidget()),
                         Divider(
                           thickness: 3,
                           color: Colors.black,
@@ -93,6 +91,14 @@ class HomePage extends StatelessWidget {
                         Text("Mitranet Valid", style: kFontHeaderStyle),
                         const ReusableContainerWidget(
                             child: ValidMitranetWidget()),
+                        Divider(
+                          thickness: 3,
+                          color: Colors.black,
+                          indent: kDefaultPadding * 5,
+                          endIndent: kDefaultPadding * 5,
+                        ),
+                        Text("Black List", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(child: BlackListWidget()),
                       ],
                     ),
                   ),
