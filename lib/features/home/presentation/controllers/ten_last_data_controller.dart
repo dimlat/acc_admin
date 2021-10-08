@@ -28,6 +28,7 @@ class TenLastDataController extends GetxController {
       final data = await firebaseFirestore
           .collection(Prospect.modelName)
           .where('stageHook', isEqualTo: stage)
+          .where('isRead', isEqualTo: true)
           .orderBy('createdAt', descending: true)
           .limit(10)
           .get();

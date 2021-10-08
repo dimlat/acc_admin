@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/constants/size.dart';
 import '../../../detail/presentation/pages/detail_page.dart';
+import '../../../prospect/domain/entities/prospect.dart';
 
 class DetailCardWidget extends StatelessWidget {
-  final dynamic data;
+  final Prospect data;
   const DetailCardWidget({
-    Key? key, required this.data,
+    Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -33,9 +36,10 @@ class DetailCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text("Last Update: ${data.namaPelanggan}"),
+          Text(
+              "Last Update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
           Text("Nama Nasabah: ${data.namaPelanggan}"),
-          Text("Expired: ${data.namaPelanggan}"),
+          Text("Nomor Telp: ${data.nomorTelp}"),
           const Spacer(),
           Expanded(
             flex: 4,
@@ -44,7 +48,6 @@ class DetailCardWidget extends StatelessWidget {
               child: const Text('Detail'),
             ),
           )
-          
         ],
       ),
     );

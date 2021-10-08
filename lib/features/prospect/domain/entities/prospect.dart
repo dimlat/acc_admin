@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class Prospect {
   static const modelName = "prospects";
+
   int bunga;
   String fotoKtp;
   String fotoNpwp;
@@ -15,6 +16,9 @@ class Prospect {
   String stageHook;
   int tenor;
   dynamic createdAt;
+  bool isRead;
+  dynamic updatedAt;
+
   Prospect({
     required this.bunga,
     required this.fotoKtp,
@@ -29,6 +33,8 @@ class Prospect {
     required this.stageHook,
     required this.tenor,
     required this.createdAt,
+    required this.isRead,
+    required this.updatedAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -46,6 +52,8 @@ class Prospect {
       'stageHook': stageHook,
       'tenor': tenor,
       'createdAt': createdAt,
+      'isRead': isRead,
+      'updatedAt': updatedAt,
     };
   }
 
@@ -64,10 +72,13 @@ class Prospect {
       stageHook: map['stageHook'],
       tenor: map['tenor'],
       createdAt: map['createdAt'],
+      isRead: map['isRead'],
+      updatedAt: map['updatedAt'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Prospect.fromJson(String source) => Prospect.fromMap(json.decode(source));
+  factory Prospect.fromJson(String source) =>
+      Prospect.fromMap(json.decode(source));
 }

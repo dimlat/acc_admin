@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/color.dart';
 import '../../../../core/constants/size.dart';
+import '../../../../injection_container.dart';
 import '../../../home/domain/entities/page_hook.dart';
+import '../../../prospect/domain/entities/prospect.dart';
 
 class DetailPage extends StatelessWidget {
-  final dynamic data;
+  final Prospect data;
   const DetailPage({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -36,9 +39,9 @@ class DetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Last Update: ${data['lastUpdate']}"),
-                      Text("Nama Nasabah: ${data['namaNasabah']}"),
-                      Text("Expired: ${data['expired']}"),
+                      Text("Last Update: ${data.nomorKtp}"),
+                      Text("Nama Nasabah: ${data.pokokHutang}"),
+                      Text("Expired: ${data.stageHook}"),
                       pickAction(data)
                     ],
                   ),
@@ -51,10 +54,10 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget pickAction(data) {
-    switch (data["stageHook"]) {
+  Widget pickAction(Prospect data) {
+    switch (data.stageHook) {
       case StageHook.pengajuan:
-        return actionPengajuan();
+        return actionPengajuan(data);
       case StageHook.approve:
         return actionApprove();
       case StageHook.renegosiasi:
@@ -96,9 +99,15 @@ class DetailPage extends StatelessWidget {
 
   Widget actionRenegosiasi() => const Text("Menunggu Renegosiasi");
 
-  Row actionPengajuan() {
-    // TODO: data is read
-    debugPrint("ada data pengajuan yang di read");
+  Row actionPengajuan(Prospect data) {
+    restFirestoreController.updateReturnBool(
+        collection: Prospect.modelName,
+        handle: data.handle,
+        data: {
+          "isRead": true,
+          "updatedAt": FieldValue.serverTimestamp(),
+        });
+
     return Row(
       children: [
         ElevatedButton(
