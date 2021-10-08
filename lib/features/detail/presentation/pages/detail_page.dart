@@ -149,10 +149,7 @@ class DetailPage extends StatelessWidget {
               child: const Text('Jadwalkan Akad'),
             ),
             kWidht(),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Renego'),
-            ),
+            RenegoPlafon(data: data),
           ],
         );
       });
@@ -163,12 +160,8 @@ class DetailPage extends StatelessWidget {
             DatePicker.showDateTimePicker(
               context,
               showTitleActions: true,
-              minTime: DateTime.now(), //DateTime(2021, 5, 5, 20, 50),
+              minTime: DateTime.now(),
               maxTime: DateTime(2022, 6, 7, 05, 09),
-              // onChanged: (date) {
-              //   print('change $date in time zone ' +
-              //       date.timeZoneOffset.inHours.toString());
-              // },
               onConfirm: (date) async {
                 onLoading();
                 await restFirestoreController.updateReturnBool(
@@ -193,7 +186,7 @@ class DetailPage extends StatelessWidget {
 
   Widget actionRenegosiasi() => const Text("Menunggu Renegosiasi");
 
-  Row actionPengajuan(Prospect data) {
+  Column actionPengajuan(Prospect data) {
     if (!data.isRead) {
       restFirestoreController.updateReturnBool(
         collection: Prospect.modelName,
@@ -204,9 +197,10 @@ class DetailPage extends StatelessWidget {
         },
       );
     }
-
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        kHeight(),
         ElevatedButton(
           onPressed: () async {
             onLoading();
@@ -224,17 +218,21 @@ class DetailPage extends StatelessWidget {
           },
           child: const Text('Approve'),
         ),
-        kWidht(),
+        kHeight(),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.snackbar(
+              "Comming Soon",
+              "Dalam pengembangan",
+              icon: const Icon(Icons.person, color: Colors.white),
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          },
           child: const Text('Resubmit Data'),
         ),
-        kWidht(),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Renego'),
-        ),
-        kWidht(),
+        kHeight(),
+        RenegoPlafon(data: data),
+        kHeight(),
         ElevatedButton(
           onPressed: () async {
             onLoading();
@@ -253,6 +251,77 @@ class DetailPage extends StatelessWidget {
           child: const Text('Black List'),
         ),
       ],
+    );
+  }
+}
+
+class RenegoPlafon extends StatelessWidget {
+  final Prospect? data;
+  const RenegoPlafon({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+        String jumlah = "";
+        Get.defaultDialog(
+          title: "Perubahan Plafon",
+          content: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  onChanged: (test) {
+                    jumlah = test;
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    hintText: 'Masukkan Penawaran',
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'harus ada penawaran';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          onLoading();
+                          await restFirestoreController.updateReturnBool(
+                            collection: Prospect.modelName,
+                            handle: data!.handle,
+                            data: {
+                              "pokokHutang": int.parse(jumlah),
+                              "updatedAt": FieldValue.serverTimestamp(),
+                              "stageHook": StageHook.renegosiasi
+                            },
+                          );
+                          await 1.delay();
+                          unLoading;
+                          Get.offAll(() => const BottomNavBarPage());
+                        }
+                      },
+                      child: const Text('Renego'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          textCancel: "Batal",
+        );
+      },
+      child: const Text('Renego'),
     );
   }
 }

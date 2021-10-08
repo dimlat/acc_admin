@@ -43,7 +43,8 @@ class DetailCardWidget extends StatelessWidget {
           Text("Nomor Telp: ${data.nomorTelp}"),
           const Spacer(),
           if (data.stageHook != StageHook.blackList &&
-              data.stageHook != StageHook.validMitranet)
+              data.stageHook != StageHook.validMitranet &&
+              data.stageHook != StageHook.renegosiasi)
             ElevatedButton(
               onPressed: () => Get.to(() => DetailPage(data: data)),
               child: const Text('Detail'),

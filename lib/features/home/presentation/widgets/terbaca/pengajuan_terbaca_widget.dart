@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
-class PengajuanWidget extends StatelessWidget {
-  const PengajuanWidget({
+class PengajuanTerbacaWidget extends StatelessWidget {
+  const PengajuanTerbacaWidget({
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class PengajuanWidget extends StatelessWidget {
           Expanded(
             child: ReusableColumnWidget(
               hook: PageHook(
-                  stage: StageHook.pengajuan, section: SectionHook.latest),
+                  stage: StageHook.pengajuan, section: SectionHook.read),
             ),
           ),
         ],
