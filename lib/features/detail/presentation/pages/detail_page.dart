@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/constants/color.dart';
 import '../../../../core/constants/size.dart';
@@ -39,9 +40,9 @@ class DetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Last Update: ${data.nomorKtp}"),
-                      Text("Nama Nasabah: ${data.pokokHutang}"),
-                      Text("Expired: ${data.stageHook}"),
+                      Text(
+                          "Last Update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
+                      Text("Nama Nasabah: ${data.namaPelanggan}"),
                       pickAction(data)
                     ],
                   ),
@@ -100,13 +101,16 @@ class DetailPage extends StatelessWidget {
   Widget actionRenegosiasi() => const Text("Menunggu Renegosiasi");
 
   Row actionPengajuan(Prospect data) {
-    restFirestoreController.updateReturnBool(
+    if (!data.isRead) {
+      restFirestoreController.updateReturnBool(
         collection: Prospect.modelName,
         handle: data.handle,
         data: {
           "isRead": true,
           "updatedAt": FieldValue.serverTimestamp(),
-        });
+        },
+      );
+    }
 
     return Row(
       children: [

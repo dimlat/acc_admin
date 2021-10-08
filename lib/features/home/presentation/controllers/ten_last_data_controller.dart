@@ -11,6 +11,9 @@ class TenLastDataController extends GetxController {
   Future route(PageHook hook) async {
     switch (hook.section) {
       case SectionHook.latest:
+        if (hook.stage == 'pengajuan') {
+          return await _dataLatestUnread(hook.stage);
+        }
         return await _dataLatest(hook.stage);
       case SectionHook.history:
         return await _dataHistory();
@@ -53,6 +56,30 @@ class TenLastDataController extends GetxController {
           .orderBy('createdAt', descending: true)
           .limit(10)
           .get();
+      if (data.size > 0) {
+        for (var element in data.docs) {
+          list.add(Prospect.fromMap(element.data()));
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    return list;
+  }
+
+  Future<List<Prospect>> _dataLatestUnread(String stage) async {
+    List<Prospect> list = [];
+
+    try {
+      final data = await firebaseFirestore
+          .collection(Prospect.modelName)
+          .where('stageHook', isEqualTo: stage)
+          .where('isRead', isEqualTo: false)
+          .orderBy('createdAt', descending: false)
+          .limit(10)
+          .get();
+
       if (data.size > 0) {
         for (var element in data.docs) {
           list.add(Prospect.fromMap(element.data()));
