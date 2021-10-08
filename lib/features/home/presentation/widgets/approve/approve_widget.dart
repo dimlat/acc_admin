@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
-class ApproveRenegoWidget extends StatelessWidget {
-  const ApproveRenegoWidget({
+class ApproveWidget extends StatelessWidget {
+  const ApproveWidget({
     Key? key,
   }) : super(key: key);
 
@@ -15,14 +15,6 @@ class ApproveRenegoWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
-            child: ReusableColumnWidget(
-              hook: PageHook(
-                  stage: StageHook.renegosiasi,
-                  section: SectionHook.renegosiasi),
-            ),
-          ),
-          const VerticalDivider(thickness: 2),
           Expanded(
             child: ReusableColumnWidget(
               hook: PageHook(

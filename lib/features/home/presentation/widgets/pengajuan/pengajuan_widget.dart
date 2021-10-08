@@ -16,15 +16,9 @@ class PengajuanWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-              child: ReusableColumnWidget(
-            hook:
-                PageHook(stage: StageHook.pengajuan, section: SectionHook.read),
-          )),
-          const VerticalDivider(thickness: 2),
-          Expanded(
             child: ReusableColumnWidget(
               hook: PageHook(
-                  stage: StageHook.pengajuan, section: SectionHook.latest),
+                  stage: StageHook.pengajuan, section: SectionHook.read),
             ),
           ),
         ],

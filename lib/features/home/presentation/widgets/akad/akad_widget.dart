@@ -17,11 +17,6 @@ class AkadWidget extends StatelessWidget {
         children: [
           Expanded(
               child: ReusableColumnWidget(
-            hook: PageHook(stage: StageHook.akad, section: SectionHook.history),
-          )),
-          const VerticalDivider(thickness: 2),
-          Expanded(
-              child: ReusableColumnWidget(
             hook: PageHook(stage: StageHook.akad, section: SectionHook.latest),
           )),
         ],

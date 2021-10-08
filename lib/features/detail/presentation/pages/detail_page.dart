@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -91,15 +92,78 @@ class DetailPage extends StatelessWidget {
         child: const Text('Konfirmasi Nasabah Valid'),
       );
 
-  Widget actionCekFisik() => ElevatedButton(
-        onPressed: () {},
-        child: const Text('Jadwalkan Akad'),
-      );
+  Widget actionCekFisik() => Builder(builder: (context) {
+        return Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                DatePicker.showDateTimePicker(
+                  context,
+                  showTitleActions: true,
+                  minTime: DateTime.now(),
+                  maxTime: DateTime(2022, 6, 7, 05, 09),
+                  onConfirm: (date) async {
+                    onLoading();
+                    await restFirestoreController.updateReturnBool(
+                      collection: Prospect.modelName,
+                      handle: data.handle,
+                      data: {
+                        "updatedAt": FieldValue.serverTimestamp(),
+                        "jadwalAkad": date,
+                        "stageHook": StageHook.akad,
+                      },
+                    );
+                    2.delay();
+                    unLoading;
+                    Get.offAll(() => const BottomNavBarPage());
+                  },
+                  locale: LocaleType.id,
+                );
+              },
+              child: const Text('Jadwalkan Akad'),
+            ),
+            kWidht(),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Renego'),
+            ),
+          ],
+        );
+      });
 
-  Widget actionApprove() => ElevatedButton(
-        onPressed: () {},
-        child: const Text('Jadwalkan Pengecekan Fisik'),
-      );
+  Widget actionApprove() => Builder(builder: (context) {
+        return ElevatedButton(
+          onPressed: () {
+            DatePicker.showDateTimePicker(
+              context,
+              showTitleActions: true,
+              minTime: DateTime.now(), //DateTime(2021, 5, 5, 20, 50),
+              maxTime: DateTime(2022, 6, 7, 05, 09),
+              // onChanged: (date) {
+              //   print('change $date in time zone ' +
+              //       date.timeZoneOffset.inHours.toString());
+              // },
+              onConfirm: (date) async {
+                onLoading();
+                await restFirestoreController.updateReturnBool(
+                  collection: Prospect.modelName,
+                  handle: data.handle,
+                  data: {
+                    "updatedAt": FieldValue.serverTimestamp(),
+                    "jadwalCheckFisik": date,
+                    "stageHook": StageHook.cekFisik,
+                  },
+                );
+                2.delay();
+                unLoading;
+                Get.offAll(() => const BottomNavBarPage());
+              },
+              locale: LocaleType.id,
+            );
+          },
+          child: const Text('Jadwalkan Pengecekan Fisik'),
+        );
+      });
 
   Widget actionRenegosiasi() => const Text("Menunggu Renegosiasi");
 

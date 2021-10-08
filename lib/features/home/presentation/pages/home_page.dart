@@ -5,10 +5,11 @@ import '../../../../core/constants/color.dart';
 import '../../../../core/constants/font_styling.dart';
 import '../../../../core/constants/size.dart';
 import '../widgets/akad/akad_widget.dart';
-import '../widgets/approve_renego/approve_renego_widget.dart';
+import '../widgets/approve/approve_widget.dart';
 import '../widgets/black_list/black_list_widget.dart';
 import '../widgets/check_fisik/check_fisik_widget.dart';
 import '../widgets/pengajuan/pengajuan_widget.dart';
+import '../widgets/renego/renego_widget.dart';
 import '../widgets/reusable_container_widget.dart';
 import '../widgets/valid_mitranet/valid_mitranet_widget.dart';
 import '../widgets/valid_nasabah/valid_nasabah_widget.dart';
@@ -47,15 +48,24 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text("Pengajuan", style: kFontHeaderStyle),
                         const ReusableContainerWidget(child: PengajuanWidget()),
+                        Text("Dibuka", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(child: PengajuanWidget()),
                         Divider(
                           thickness: 3,
                           color: Colors.black,
                           indent: kDefaultPadding * 5,
                           endIndent: kDefaultPadding * 5,
                         ),
-                        Text("Renego / Approve", style: kFontHeaderStyle),
-                        const ReusableContainerWidget(
-                            child: ApproveRenegoWidget()),
+                        Text("Renego", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(child: RenegoWidget()),
+                        Divider(
+                          thickness: 3,
+                          color: Colors.black,
+                          indent: kDefaultPadding * 5,
+                          endIndent: kDefaultPadding * 5,
+                        ),
+                        Text("Approve", style: kFontHeaderStyle),
+                        const ReusableContainerWidget(child: ApproveWidget()),
                         Divider(
                           thickness: 3,
                           color: Colors.black,

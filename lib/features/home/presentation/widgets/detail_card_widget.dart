@@ -20,7 +20,7 @@ class DetailCardWidget extends StatelessWidget {
       alignment: Alignment.center,
       margin: EdgeInsets.all(kDefaultPadding),
       padding: EdgeInsets.all(kDefaultPadding),
-      height: 100,
+      height: 230,
       width: 383,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -43,14 +43,10 @@ class DetailCardWidget extends StatelessWidget {
           Text("Nomor Telp: ${data.nomorTelp}"),
           const Spacer(),
           if (data.stageHook != StageHook.blackList)
-            Expanded(
-              flex: 4,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => DetailPage(data: data)),
-                child: const Text('Detail'),
-              ),
-            )
-        ],
+            ElevatedButton(
+              onPressed: () => Get.to(() => DetailPage(data: data)),
+              child: const Text('Detail'),
+            ),        ],
       ),
     );
   }

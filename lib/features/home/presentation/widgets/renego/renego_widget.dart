@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/page_hook.dart';
 import '../reusable_column_widget.dart';
 
-class CheckFisikWidget extends StatelessWidget {
-  const CheckFisikWidget({
+class RenegoWidget extends StatelessWidget {
+  const RenegoWidget({
     Key? key,
   }) : super(key: key);
 
@@ -16,9 +16,12 @@ class CheckFisikWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-              child: ReusableColumnWidget(
-                  hook: PageHook(
-                      stage: StageHook.cekFisik, section: SectionHook.latest))),
+            child: ReusableColumnWidget(
+              hook: PageHook(
+                  stage: StageHook.renegosiasi,
+                  section: SectionHook.renegosiasi),
+            ),
+          ),
         ],
       ),
     );
