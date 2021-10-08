@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/constants/size.dart';
 import '../../../detail/presentation/pages/detail_page.dart';
 import '../../../prospect/domain/entities/prospect.dart';
+import '../../domain/entities/page_hook.dart';
 
 class DetailCardWidget extends StatelessWidget {
   final Prospect data;
@@ -41,13 +42,14 @@ class DetailCardWidget extends StatelessWidget {
           Text("Nama Nasabah: ${data.namaPelanggan}"),
           Text("Nomor Telp: ${data.nomorTelp}"),
           const Spacer(),
-          Expanded(
-            flex: 4,
-            child: ElevatedButton(
-              onPressed: () => Get.to(() => DetailPage(data: data)),
-              child: const Text('Detail'),
-            ),
-          )
+          if (data.stageHook != StageHook.blackList)
+            Expanded(
+              flex: 4,
+              child: ElevatedButton(
+                onPressed: () => Get.to(() => DetailPage(data: data)),
+                child: const Text('Detail'),
+              ),
+            )
         ],
       ),
     );

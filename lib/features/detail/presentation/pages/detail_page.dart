@@ -146,7 +146,20 @@ class DetailPage extends StatelessWidget {
         ),
         kWidht(),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            onLoading();
+            await restFirestoreController.updateReturnBool(
+              collection: Prospect.modelName,
+              handle: data.handle,
+              data: {
+                "stageHook": StageHook.blackList,
+                "updatedAt": FieldValue.serverTimestamp(),
+              },
+            );
+            2.delay();
+            unLoading;
+            Get.offAll(() => const BottomNavBarPage());
+          },
           child: const Text('Black List'),
         ),
       ],
