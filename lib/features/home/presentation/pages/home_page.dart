@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text("Pengajuan", style: kFontHeaderStyle),
                         const ReusableContainerWidget(child: PengajuanWidget()),
-                        Text("Dibuka", style: kFontHeaderStyle),
+                        Text("Dibaca", style: kFontHeaderStyle),
                         const ReusableContainerWidget(child: PengajuanWidget()),
                         Divider(
                           thickness: 3,

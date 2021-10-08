@@ -83,12 +83,38 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget actionValid() => ElevatedButton(
-        onPressed: () {},
+        onPressed: () async {
+          onLoading();
+          await restFirestoreController.updateReturnBool(
+            collection: Prospect.modelName,
+            handle: data.handle,
+            data: {
+              "stageHook": StageHook.validMitranet,
+              "updatedAt": FieldValue.serverTimestamp(),
+            },
+          );
+          await 1.delay();
+          unLoading;
+          Get.offAll(() => const BottomNavBarPage());
+        },
         child: const Text('Valid MitraNet'),
       );
 
   Widget actionAkad() => ElevatedButton(
-        onPressed: () {},
+        onPressed: () async {
+          onLoading();
+          restFirestoreController.updateReturnBool(
+            collection: Prospect.modelName,
+            handle: data.handle,
+            data: {
+              "stageHook": StageHook.validNasabah,
+              "updatedAt": FieldValue.serverTimestamp(),
+            },
+          );
+          await 1.delay();
+          unLoading;
+          Get.offAll(() => const BottomNavBarPage());
+        },
         child: const Text('Konfirmasi Nasabah Valid'),
       );
 
@@ -113,7 +139,7 @@ class DetailPage extends StatelessWidget {
                         "stageHook": StageHook.akad,
                       },
                     );
-                    2.delay();
+                    await 1.delay();
                     unLoading;
                     Get.offAll(() => const BottomNavBarPage());
                   },
@@ -154,7 +180,7 @@ class DetailPage extends StatelessWidget {
                     "stageHook": StageHook.cekFisik,
                   },
                 );
-                2.delay();
+                await 1.delay();
                 unLoading;
                 Get.offAll(() => const BottomNavBarPage());
               },
@@ -192,7 +218,7 @@ class DetailPage extends StatelessWidget {
                 "updatedAt": FieldValue.serverTimestamp(),
               },
             );
-            2.delay();
+            await 1.delay();
             unLoading;
             Get.offAll(() => const BottomNavBarPage());
           },
@@ -220,7 +246,7 @@ class DetailPage extends StatelessWidget {
                 "updatedAt": FieldValue.serverTimestamp(),
               },
             );
-            2.delay();
+            await 1.delay();
             unLoading;
             Get.offAll(() => const BottomNavBarPage());
           },

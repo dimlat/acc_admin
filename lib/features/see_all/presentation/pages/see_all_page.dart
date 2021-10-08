@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/color.dart';
 import '../../../../core/constants/size.dart';
-import '../../../../core/constants/wording_default.dart';
 import '../../../home/domain/entities/page_hook.dart';
 
 class SeeAllPage extends StatelessWidget {
@@ -14,7 +13,7 @@ class SeeAllPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("${hook!.stage} ${hook!.section}"),
+          title: Text("Semua ${hook!.stage}"),
           centerTitle: false,
           backgroundColor: kColorDarkPrimary,
           elevation: 0,
@@ -35,8 +34,8 @@ class SeeAllPage extends StatelessWidget {
                 ),
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [
-                      Text(kDefaultTextContent),
+                    children: const [
+                      Text("Halaman ini sedang dalam pengembahangan"),
                     ],
                   ),
                 ),

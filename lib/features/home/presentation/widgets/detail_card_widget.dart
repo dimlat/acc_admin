@@ -42,11 +42,13 @@ class DetailCardWidget extends StatelessWidget {
           Text("Nama Nasabah: ${data.namaPelanggan}"),
           Text("Nomor Telp: ${data.nomorTelp}"),
           const Spacer(),
-          if (data.stageHook != StageHook.blackList)
+          if (data.stageHook != StageHook.blackList &&
+              data.stageHook != StageHook.validMitranet)
             ElevatedButton(
               onPressed: () => Get.to(() => DetailPage(data: data)),
               child: const Text('Detail'),
-            ),        ],
+            ),
+        ],
       ),
     );
   }

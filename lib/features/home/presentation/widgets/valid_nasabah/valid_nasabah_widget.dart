@@ -16,9 +16,11 @@ class ValidNasabahWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-              child: ReusableColumnWidget(
-                  hook: PageHook(
-                      stage: StageHook.validNasabah, section: SectionHook.latest))),
+            child: ReusableColumnWidget(
+              hook: PageHook(
+                  stage: StageHook.validNasabah, section: SectionHook.latest),
+            ),
+          ),
         ],
       ),
     );
