@@ -34,23 +34,39 @@ class DetailCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-              "Last Update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
-          Text("Nama Nasabah: ${data.namaPelanggan}"),
-          Text("Nomor Telp: ${data.nomorTelp}"),
-          const Spacer(),
-          if (data.stageHook != StageHook.blackList &&
-              data.stageHook != StageHook.validMitranet &&
-              data.stageHook != StageHook.renegosiasi)
-            ElevatedButton(
-              onPressed: () => Get.to(() => DetailPage(data: data)),
-              child: const Text('Detail'),
-            ),
-        ],
-      ),
+      child: cardContent(),
     );
+  }
+
+  Column cardContent() {
+    String diBuatTanggal = DateFormat('yyyy-MM-dd – kk:mm')
+        .format(DateTime.parse(data.createdAt.toDate().toString()));
+    String diUpdateTanggal = DateFormat('yyyy-MM-dd – kk:mm')
+        .format(DateTime.parse(data.updatedAt.toDate().toString()));
+    switch (data.stageHook) {
+      case StageHook.pengajuan:
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text("Dibuat tanggal: $diBuatTanggal"),
+            Text("Di update tanggal: $diUpdateTanggal"),
+            Text("Nama Nasabah: ${data.namaPelanggan}"),
+            // const Spacer(),
+            if (data.stageHook != StageHook.blackList &&
+                data.stageHook != StageHook.validMitranet &&
+                data.stageHook != StageHook.renegosiasi)
+              ElevatedButton(
+                onPressed: () => Get.to(() => DetailPage(data: data)),
+                child: const Text('Detail'),
+              ),
+          ],
+        );
+      default:
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const [Text("Kosong")],
+        );
+    }
   }
 }

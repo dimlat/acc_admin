@@ -25,8 +25,16 @@ class DetailPage extends StatelessWidget {
           centerTitle: false,
           backgroundColor: kColorDarkPrimary,
           elevation: 0,
-          iconTheme: IconThemeData(
-            color: kColorFontPrimary,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              if (!data.isRead) {
+                Get.offAll(() => const BottomNavBarPage());
+                return;
+              }
+              Get.back();
+              return;
+            },
           ),
         ),
         body: Padding(
@@ -43,12 +51,7 @@ class DetailPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          "Last Update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
-                      Text("Nama Nasabah: ${data.namaPelanggan}"),
-                      pickAction(data)
-                    ],
+                    children: [pickAction(data)],
                   ),
                 ),
               );
@@ -91,6 +94,13 @@ class DetailPage extends StatelessWidget {
             data: {
               "stageHook": StageHook.validMitranet,
               "updatedAt": FieldValue.serverTimestamp(),
+            },
+          );
+          await restFirestoreController.insertTransactions(
+            data: {
+              "handleUser": data.handleUser,
+              "timeStamp": FieldValue.serverTimestamp(),
+              "nominal": data.pokokHutang,
             },
           );
           await 1.delay();
@@ -200,6 +210,19 @@ class DetailPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Text(
+            "Tanggal di buat: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.createdAt.toDate().toString()))}"),
+        Text(
+            "Tanggal di update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
+        Text("Nama Nasabah: ${data.namaPelanggan}"),
+        Text("Total Nominal: ${data.pokokHutang}"),
+        Text("Tenor: ${data.tenor} Tahun"),
+        Text("Bunga: ${data.bunga}% per bulan"),
+        const Text("Foto KTP:"),
+        Image.network(data.fotoKtp),
+        const Text("Foto NPWP:"),
+        Image.network(data.fotoNpwp),
+        Text("Nomor Telp: ${data.nomorTelp}"),
         kHeight(),
         ElevatedButton(
           onPressed: () async {

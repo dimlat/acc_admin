@@ -16,4 +16,13 @@ class RestFirestoreController extends GetxController {
     }
     return true;
   }
+
+  Future<bool> insertTransactions({required Map<String, dynamic> data}) async {
+    final docRef = firebaseFirestore.collection("transactions").doc();
+    await firebaseFirestore
+        .collection("transactions")
+        .doc(docRef.id)
+        .set({"handle": docRef.id, ...data});
+    return true;
+  }
 }
