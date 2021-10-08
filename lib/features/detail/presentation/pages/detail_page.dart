@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/constants/color.dart';
+import '../../../../core/constants/loader.dart';
 import '../../../../core/constants/size.dart';
 import '../../../../injection_container.dart';
+import '../../../bottom_nav_bar/presentation/pages/bottom_nav_bar_page.dart';
 import '../../../home/domain/entities/page_hook.dart';
 import '../../../prospect/domain/entities/prospect.dart';
 
@@ -115,17 +118,33 @@ class DetailPage extends StatelessWidget {
     return Row(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            onLoading();
+            await restFirestoreController.updateReturnBool(
+              collection: Prospect.modelName,
+              handle: data.handle,
+              data: {
+                "stageHook": StageHook.approve,
+                "updatedAt": FieldValue.serverTimestamp(),
+              },
+            );
+            2.delay();
+            unLoading;
+            Get.offAll(() => const BottomNavBarPage());
+          },
           child: const Text('Approve'),
         ),
+        kWidht(),
         ElevatedButton(
           onPressed: () {},
           child: const Text('Resubmit Data'),
         ),
+        kWidht(),
         ElevatedButton(
           onPressed: () {},
           child: const Text('Renego'),
         ),
+        kWidht(),
         ElevatedButton(
           onPressed: () {},
           child: const Text('Black List'),

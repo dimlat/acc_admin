@@ -19,6 +19,10 @@ class TenLastDataController extends GetxController {
         return await _dataHistory();
       case SectionHook.read:
         return await _dataRead(hook.stage);
+      case SectionHook.approve:
+        return await _dataLatest(hook.stage);
+      case SectionHook.renegosiasi:
+        return await _dataLatest(hook.stage);
       default:
         return [];
     }
