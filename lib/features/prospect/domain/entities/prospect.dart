@@ -18,6 +18,8 @@ class Prospect {
   dynamic createdAt;
   bool isRead;
   dynamic updatedAt;
+  dynamic jadwalCheckFisik;
+  dynamic jadwalAkad;
 
   Prospect({
     required this.bunga,
@@ -35,6 +37,8 @@ class Prospect {
     required this.createdAt,
     required this.isRead,
     required this.updatedAt,
+    this.jadwalCheckFisik,
+    this.jadwalAkad,
   });
 
   Map<String, dynamic> toMap() {
@@ -54,6 +58,8 @@ class Prospect {
       'createdAt': createdAt,
       'isRead': isRead,
       'updatedAt': updatedAt,
+      'jadwalCheckFisik': jadwalCheckFisik,
+      'jadwalAkad': jadwalAkad,
     };
   }
 
@@ -74,6 +80,8 @@ class Prospect {
       createdAt: map['createdAt'],
       isRead: map['isRead'],
       updatedAt: map['updatedAt'],
+      jadwalCheckFisik: map['jadwalCheckFisik'],
+      jadwalAkad: map['jadwalAkad'],
     );
   }
 

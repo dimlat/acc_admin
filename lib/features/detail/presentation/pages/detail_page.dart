@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/constants/color.dart';
 import '../../../../core/constants/loader.dart';
 import '../../../../core/constants/size.dart';
+import '../../../../core/utils/number_format.dart';
 import '../../../../injection_container.dart';
 import '../../../bottom_nav_bar/presentation/pages/bottom_nav_bar_page.dart';
 import '../../../home/domain/entities/page_hook.dart';
@@ -165,32 +166,42 @@ class DetailPage extends StatelessWidget {
       });
 
   Widget actionApprove() => Builder(builder: (context) {
-        return ElevatedButton(
-          onPressed: () {
-            DatePicker.showDateTimePicker(
-              context,
-              showTitleActions: true,
-              minTime: DateTime.now(),
-              maxTime: DateTime(2022, 6, 7, 05, 09),
-              onConfirm: (date) async {
-                onLoading();
-                await restFirestoreController.updateReturnBool(
-                  collection: Prospect.modelName,
-                  handle: data.handle,
-                  data: {
-                    "updatedAt": FieldValue.serverTimestamp(),
-                    "jadwalCheckFisik": date,
-                    "stageHook": StageHook.cekFisik,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text("Nama Nasabah: ${data.namaPelanggan}"),
+            Text("Pokok hutang: Rp ${numberFormat.format(data.pokokHutang)}"),
+            Text("Tenor: ${data.tenor * 12} bulan"),
+            Text("Hujrah: ${data.bunga}%"),
+            kHeight(),
+            ElevatedButton(
+              onPressed: () {
+                DatePicker.showDateTimePicker(
+                  context,
+                  showTitleActions: true,
+                  minTime: DateTime.now(),
+                  maxTime: DateTime(2022, 6, 7, 05, 09),
+                  onConfirm: (date) async {
+                    onLoading();
+                    await restFirestoreController.updateReturnBool(
+                      collection: Prospect.modelName,
+                      handle: data.handle,
+                      data: {
+                        "updatedAt": FieldValue.serverTimestamp(),
+                        "jadwalCheckFisik": date,
+                        "stageHook": StageHook.cekFisik,
+                      },
+                    );
+                    await 1.delay();
+                    unLoading;
+                    Get.offAll(() => const BottomNavBarPage());
                   },
+                  locale: LocaleType.id,
                 );
-                await 1.delay();
-                unLoading;
-                Get.offAll(() => const BottomNavBarPage());
               },
-              locale: LocaleType.id,
-            );
-          },
-          child: const Text('Jadwalkan Pengecekan Fisik'),
+              child: const Text('Jadwalkan Pengecekan Fisik'),
+            ),
+          ],
         );
       });
 
@@ -215,9 +226,9 @@ class DetailPage extends StatelessWidget {
         Text(
             "Tanggal di update: ${DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.parse(data.updatedAt.toDate().toString()))}"),
         Text("Nama Nasabah: ${data.namaPelanggan}"),
-        Text("Total Nominal: ${data.pokokHutang}"),
-        Text("Tenor: ${data.tenor} Tahun"),
-        Text("Bunga: ${data.bunga}% per bulan"),
+        Text("Pokok hutang: Rp ${numberFormat.format(data.pokokHutang)}"),
+        Text("Tenor: ${data.tenor * 12} bulan"),
+        Text("Hujrah: ${data.bunga}%"),
         const Text("Foto KTP:"),
         Image.network(data.fotoKtp),
         const Text("Foto NPWP:"),
