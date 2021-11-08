@@ -125,6 +125,7 @@ class HomePage extends StatelessWidget {
                           onTap: () => Get.to(
                             () => const ReusableContainerWidget(
                               child: ValidMitranetWidget(),
+                              pageTitle: "Valid Mitranet",
                             ),
                           ),
                           child:
@@ -140,6 +141,7 @@ class HomePage extends StatelessWidget {
                           onTap: () => Get.to(
                             () => const ReusableContainerWidget(
                               child: BlackListWidget(),
+                              pageTitle: "Black List",
                             ),
                           ),
                           child: Text("Black List", style: kFontHeaderStyle),
