@@ -74,122 +74,12 @@ class SideMenu extends StatelessWidget {
               press: () => pageController.subPageShow.value =
                   PageNameStaticClass.validMitranet),
           DrawerListTile(
-              staticPageName: PageNameStaticClass.blackList,
-              title: "Black List",
-              iconData: Icons.no_accounts,
-              press: () => pageController.subPageShow.value =
-                  PageNameStaticClass.blackList),
-          // SingleChildScrollView(
-          //   child: Column(
-          //     children: [
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: PengajuanWidget(),
-          //       pageTitle: "Pengajuan",
-          //     ),
-          //   ),
-          //   child: Text("Pengajuan", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: PengajuanTerbacaWidget(),
-          //       pageTitle: "Terbaca",
-          //     ),
-          //   ),
-          //   child: Text("Dibaca", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: RenegoWidget(),
-          //       pageTitle: "Re-Nego",
-          //     ),
-          //   ),
-          //   child: Text("Renego", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: ApproveWidget(),
-          //       pageTitle: "Approve",
-          //     ),
-          //   ),
-          //   child: Text("Approve", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: AkadWidget(),
-          //       pageTitle: "Akad",
-          //     ),
-          //   ),
-          //   child: Text("Akad", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: ValidMitranetWidget(),
-          //       pageTitle: "Valid Mitranet",
-          //     ),
-          //   ),
-          //   child: Text("Valid Mitranet", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          // GestureDetector(
-          //   onTap: () => Get.to(
-          //     () => const ReusableContainerWidget(
-          //       child: BlackListWidget(),
-          //       pageTitle: "Black List",
-          //     ),
-          //   ),
-          //   child: Text("Black List", style: kFontHeaderStyle),
-          // ),
-          // Divider(
-          //   thickness: 3,
-          //   color: Colors.black,
-          //   indent: kDefaultPadding * 5,
-          //   endIndent: kDefaultPadding * 5,
-          // ),
-          //     ],
-          //   ),
-          // ),
+            staticPageName: PageNameStaticClass.blackList,
+            title: "Black List",
+            iconData: Icons.no_accounts,
+            press: () => pageController.subPageShow.value =
+                PageNameStaticClass.blackList,
+          ),
         ],
       ),
     );
