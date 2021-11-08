@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               child: SideMenu(),
             ),
             Flexible(
-              flex: 6,
+              flex: 9,
               child: ContentMenu(),
             ),
             Flexible(

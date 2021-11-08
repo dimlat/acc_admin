@@ -5,6 +5,7 @@ import '../../../../../core/controllers/page_controller/page_name_static_class.d
 import '../../../../../injection_container.dart';
 import '../../widgets/akad/akad_widget.dart';
 import '../../widgets/approve/approve_widget.dart';
+import '../../widgets/dashboard/dashboard_widget.dart';
 import '../../widgets/pengajuan/pengajuan_widget.dart';
 import '../../widgets/renego/renego_widget.dart';
 import '../../widgets/reusable_container_widget.dart';
@@ -18,15 +19,21 @@ class ContentMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => getPageWidget());
+    return Obx(() => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: getPageWidget(),
+        ));
   }
 }
 
 Widget getPageWidget() {
-  Widget pageWidget;
+  Widget pageWidget = Container();
   switch (pageController.subPageShow.value) {
     case PageNameStaticClass.home:
-      pageWidget = const Text("should be the dashboard");
+      const ReusableContainerWidget(
+        child: DashboardWidget(),
+        pageTitle: "Dashboard",
+      );
       break;
     case PageNameStaticClass.pengajuan:
       pageWidget = const ReusableContainerWidget(
@@ -71,7 +78,10 @@ Widget getPageWidget() {
       );
       break;
     default:
-      pageWidget = const Text("Sorry this page doesnt exist");
+      pageWidget = const ReusableContainerWidget(
+        child: DashboardWidget(),
+        pageTitle: "Dashboard",
+      );
   }
   return pageWidget;
 }
