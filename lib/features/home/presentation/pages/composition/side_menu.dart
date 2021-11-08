@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/asset_path.dart';
-import '../../../../../core/constants/font_styling.dart';
+import '../../../../../core/constants/color.dart';
 import '../../../../../core/constants/size.dart';
-import '../../widgets/akad/akad_widget.dart';
-import '../../widgets/approve/approve_widget.dart';
-import '../../widgets/black_list/black_list_widget.dart';
-import '../../widgets/pengajuan/pengajuan_widget.dart';
-import '../../widgets/renego/renego_widget.dart';
-import '../../widgets/reusable_container_widget.dart';
-import '../../widgets/terbaca/pengajuan_terbaca_widget.dart';
-import '../../widgets/valid_mitranet/valid_mitranet_widget.dart';
+import '../../../../../core/controllers/page_controller/page_name_static_class.dart';
+import '../../../../../injection_container.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -29,147 +23,214 @@ class SideMenu extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(kDefaultPadding),
-                  child: Image.asset(
-                    logoSmall,
-                    height: 100,
-                    filterQuality: FilterQuality.high
-                  ),
+                  child: Image.asset(logoSmall,
+                      height: 100, filterQuality: FilterQuality.high),
                 ),
                 const Text("Version 1.0"),
               ],
             ),
           ),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.all(kDefaultPadding),
-              child: LayoutBuilder(
-                builder: (
-                  BuildContext context,
-                  BoxConstraints viewportConstraints,
-                ) {
-                  return ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: viewportConstraints.maxHeight,
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: PengajuanWidget(),
-                                pageTitle: "Pengajuan",
-                              ),
-                            ),
-                            child: Text("Pengajuan", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: PengajuanTerbacaWidget(),
-                                pageTitle: "Terbaca",
-                              ),
-                            ),
-                            child: Text("Dibaca", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: RenegoWidget(),
-                                pageTitle: "Re-Nego",
-                              ),
-                            ),
-                            child: Text("Renego", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: ApproveWidget(),
-                                pageTitle: "Approve",
-                              ),
-                            ),
-                            child: Text("Approve", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: AkadWidget(),
-                                pageTitle: "Akad",
-                              ),
-                            ),
-                            child: Text("Akad", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: ValidMitranetWidget(),
-                                pageTitle: "Valid Mitranet",
-                              ),
-                            ),
-                            child:
-                                Text("Valid Mitranet", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => const ReusableContainerWidget(
-                                child: BlackListWidget(),
-                                pageTitle: "Black List",
-                              ),
-                            ),
-                            child: Text("Black List", style: kFontHeaderStyle),
-                          ),
-                          Divider(
-                            thickness: 3,
-                            color: Colors.black,
-                            indent: kDefaultPadding * 5,
-                            endIndent: kDefaultPadding * 5,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+          DrawerListTile(
+            staticPageName: PageNameStaticClass.home,
+            title: "Home",
+            iconData: Icons.home,
+            press: () =>
+                pageController.subPageShow.value = PageNameStaticClass.home,
           ),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.pengajuan,
+              title: "Pengajuan",
+              iconData: Icons.list,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.pengajuan),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.terbaca,
+              title: "Terbaca",
+              iconData: Icons.receipt,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.terbaca),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.renego,
+              title: "Renego",
+              iconData: Icons.hourglass_bottom_sharp,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.renego),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.approve,
+              title: "Approve",
+              iconData: Icons.approval,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.approve),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.akad,
+              title: "Akad",
+              iconData: Icons.air_outlined,
+              press: () =>
+                  pageController.subPageShow.value = PageNameStaticClass.akad),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.validMitranet,
+              title: "Valid Mitranet",
+              iconData: Icons.monetization_on,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.validMitranet),
+          DrawerListTile(
+              staticPageName: PageNameStaticClass.blackList,
+              title: "Black List",
+              iconData: Icons.no_accounts,
+              press: () => pageController.subPageShow.value =
+                  PageNameStaticClass.blackList),
+          // SingleChildScrollView(
+          //   child: Column(
+          //     children: [
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: PengajuanWidget(),
+          //       pageTitle: "Pengajuan",
+          //     ),
+          //   ),
+          //   child: Text("Pengajuan", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: PengajuanTerbacaWidget(),
+          //       pageTitle: "Terbaca",
+          //     ),
+          //   ),
+          //   child: Text("Dibaca", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: RenegoWidget(),
+          //       pageTitle: "Re-Nego",
+          //     ),
+          //   ),
+          //   child: Text("Renego", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: ApproveWidget(),
+          //       pageTitle: "Approve",
+          //     ),
+          //   ),
+          //   child: Text("Approve", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: AkadWidget(),
+          //       pageTitle: "Akad",
+          //     ),
+          //   ),
+          //   child: Text("Akad", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: ValidMitranetWidget(),
+          //       pageTitle: "Valid Mitranet",
+          //     ),
+          //   ),
+          //   child: Text("Valid Mitranet", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          // GestureDetector(
+          //   onTap: () => Get.to(
+          //     () => const ReusableContainerWidget(
+          //       child: BlackListWidget(),
+          //       pageTitle: "Black List",
+          //     ),
+          //   ),
+          //   child: Text("Black List", style: kFontHeaderStyle),
+          // ),
+          // Divider(
+          //   thickness: 3,
+          //   color: Colors.black,
+          //   indent: kDefaultPadding * 5,
+          //   endIndent: kDefaultPadding * 5,
+          // ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
+  }
+}
+
+class DrawerListTile extends StatelessWidget {
+  const DrawerListTile({
+    Key? key,
+    required this.title,
+    required this.iconData,
+    required this.staticPageName,
+    required this.press,
+  }) : super(key: key);
+
+  final String title, staticPageName;
+  final IconData iconData;
+  final VoidCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final bool isItMe = pageController.subPageShow.value == staticPageName;
+      return ListTile(
+        tileColor: isItMe ? Colors.grey.withOpacity(0.1) : null,
+        onTap: press,
+        horizontalTitleGap: 0.0,
+        leading: Icon(
+          iconData,
+          color: isItMe ? Colors.blue : Colors.black,
+          size: 24.0,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+              color: isItMe ? kColorPrimary : Colors.black,
+              fontFamily: 'AkayaTelivigala',
+              fontSize: 20,
+              fontWeight: FontWeight.w400),
+        ),
+      );
+    });
   }
 }
