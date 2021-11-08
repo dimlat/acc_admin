@@ -23,11 +23,14 @@ class ReusableContainerWidget extends StatelessWidget {
         iconTheme: IconThemeData(
           color: kColorFontPrimary,
         ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        primary: false,
       ),
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.all(kDefaultPadding),
-        height: 300,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(kDefaultPadding)),
